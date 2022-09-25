@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Threading;
 
 namespace ControleAdocoesONG
@@ -13,6 +14,7 @@ namespace ControleAdocoesONG
         {
             do
             {
+                Console.Clear();
                 CabecalhoONG();
                 Console.WriteLine("Bem vindo ao sistema de Adoções da nossa ONG");
                 Console.WriteLine("O que deseja realizar: \n[0]Sair\n[1]Registrar \n[2]Atualizar \n[3]Consultar"); //pensar sobre o delete
@@ -39,7 +41,7 @@ namespace ControleAdocoesONG
                             CabecalhoONG();
                             Console.WriteLine("O que voce deseja Registrar: \n[0]Voltar \n[1]Pessoa (cliente) \n[2]Animal ");
                             int op1 = int.Parse(Console.ReadLine());
-                            while (op1 != 1 || op1 != 2)
+                            while (op1 < 0 || op1 > 2)
                             {
                                 Console.WriteLine("Valor inválido informado, tente novamente: ");
                                 op1 = int.Parse(Console.ReadLine());
@@ -47,12 +49,19 @@ namespace ControleAdocoesONG
                             switch (op1)
                             {
                                 case 0:
-                                    volta = true;
-                                    //voltar
+                                    volta = true;                                   
                                     break;
                                 case 1:
+                                    #region inserir pessoa             
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    ConBancoDados conexaoBD = new ConBancoDados();
+                                    Pessoa pessoa = new Pessoa();
+                                    pessoa = pessoa.CadastroPessoa();
+                                    conexaoBD.InserirPessoa(pessoa);
                                     //inserir pessoas
-                                    break;
+                                    #endregion  
+                                    break; //ok
                                 case 2:
                                     //insert into animal
                                     break;
@@ -130,7 +139,6 @@ namespace ControleAdocoesONG
                 }
             } while (true);
         }
-
         private static void CabecalhoONG()
         {
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
