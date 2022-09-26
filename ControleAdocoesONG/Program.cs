@@ -17,7 +17,7 @@ namespace ControleAdocoesONG
                 Console.Clear();
                 CabecalhoONG();
                 Console.WriteLine("Bem vindo ao sistema de Adoções da nossa ONG");
-                Console.WriteLine("O que deseja realizar: \n[0]Sair\n[1]Registrar \n[2]Atualizar \n[3]Consultar"); //pensar sobre o delete
+                Console.WriteLine("O que deseja realizar: \n[0]Sair\n[1]Registrar \n[2]Atualizar \n[3]Consultar"); 
                 int opcao = int.Parse(Console.ReadLine());
                 while (opcao < 0 || opcao > 3)
                 {
