@@ -72,9 +72,11 @@ namespace ControleAdocoesONG
                                     #endregion                                  
                                     break;
                                 case 3:
+                                    #region Inserir Registro Adoçao
                                     Console.Clear();
                                     CabecalhoONG();
                                     conexaoBD.InserirAdocao();
+                                    #endregion
                                     break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");
@@ -99,15 +101,132 @@ namespace ControleAdocoesONG
                             {
                                 case 0:
                                     volta2 = true;
-                                    //voltar
                                     break;
                                 case 1:
-                                    //update Pessoa
+                                    #region Atualiza Cliente
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    Console.WriteLine("Informe o CPF que do cliente que deseja alterar: ");
+                                    string Cpf = Console.ReadLine(); //verificar se o cpf existe no banco de dados.
+                                    Console.WriteLine("O que você deseja alterar do Cliente: \n[1]Nome \n[2]Sexo \n[3]Telefone \n[4]SiglaEstado");
+                                    int opc = int.Parse(Console.ReadLine());
+                                    while (opc < 1 || opc > 4)
+                                    {
+                                        Console.WriteLine("Opção inválida, informe novamente: ");
+                                        opc = int.Parse(Console.ReadLine());
+                                    }
+                                    switch (opc)
+                                    {
+                                        case 1:
+                                            #region Atualiza Nome
+                                            Console.WriteLine("Informe o novo nome: ");
+                                            string nome = Console.ReadLine();
+                                            string sql = "update Pessoa set Nome = '" + nome + "' where CPF = '" + Cpf + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion
+                                            break;
+                                        case 2:
+                                            #region Atualiza Sexo
+                                            Console.Write("Insira seu Sexo (M ou F): ");
+                                            string sexo = Console.ReadLine().ToUpper();
+                                            while (sexo != "M" && sexo != "F")
+                                            {
+                                                Console.Write("Valor incorreto informado, informe novamente: ");
+                                                sexo = Console.ReadLine().ToUpper();
+                                            }                                           
+                                            sql = "update Pessoa set Sexo = '" + sexo+ "' where CPF = '" + Cpf + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion 
+                                            break;
+                                        case 3:
+                                            #region Atualiza Telefone
+                                            Console.WriteLine("Informe o novo numero de Telefone: ");
+                                            string telefone = Console.ReadLine();
+                                            sql = "update Pessoa set Telefone = '" + telefone + "' where CPF = '" + Cpf + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion
+                                            break;
+                                        case 4:
+                                            #region atualiza estado
+                                            Console.WriteLine("Informe o nova sigla do estado: ");
+                                            string siglaEstado = Console.ReadLine();
+                                            sql = "update Pessoa set siglaEstado = '" + siglaEstado + "' where CPF = '" + Cpf + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion
+                                            break;
+                                        default:
+                                            Console.WriteLine("Erro de swicht!!");
+                                            break;
+                                    }
+                                    #endregion
                                     break;
                                 case 2:
-                                    //update into animal
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    Console.WriteLine("Informe o CHIP que do animal que deseja alterar o registro: ");
+                                    string Chip = Console.ReadLine(); //verificar se o cpf existe no banco de dados.
+                                    Console.WriteLine("O que você deseja alterar do Animal: \n[1]Familia \n[2]Raca \n[3]Sexo \n[4]Nome");
+                                    int opcAnimal = int.Parse(Console.ReadLine());
+                                    while (opcAnimal < 1 || opcAnimal > 4)
+                                    {
+                                        Console.WriteLine("Opção inválida, informe novamente: ");
+                                        opcAnimal = int.Parse(Console.ReadLine());
+                                    }
+                                    switch (opcAnimal)
+                                    {
+                                        case 1:
+                                            #region Atualiza Familia Animal
+                                            Console.WriteLine("Informe a nova familia do animal: ");
+                                            string familia = Console.ReadLine();
+                                            string sql = "update Animal set Nome = '" + familia + "' where CHIP = '" + Chip + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion
+                                            break;
+                                        case 2:
+                                            #region Atualiza Raca Animal 
+                                            Console.WriteLine("Informe a nova raça do animal: ");
+                                            string raca = Console.ReadLine();
+                                            string sql = "update Animal set Nome = '" + raca + "' where CHIP = '" + Chip + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion  
+                                            break;
+                                        case 3:
+                                            #region Atualiza Sexo Animal 
+                                            Console.Write("Insira o novo Sexo (M ou F): ");
+                                            string sexo = Console.ReadLine().ToUpper();
+                                            while (sexo != "M" && sexo != "F")
+                                            {
+                                                Console.Write("Valor incorreto informado, informe novamente: ");
+                                                sexo = Console.ReadLine().ToUpper();
+                                            }
+                                            sql = "update Animal set Sexo = '" + sexo + "' where CHIP = '" + sexo + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion
+                                            break;
+                                        case 4:
+                                            #region Atualiza Nome Animal
+                                            Console.WriteLine("Informe o novo nome do animal: ");
+                                            string nome = Console.ReadLine();
+                                            string sql = "update Animal set Nome = '" + familia + "' where CHIP = '" + Chip + "';";
+                                            conexaoBD.UpdateTable(sql);
+                                            PressioneParaProsseguir();
+                                            #endregion
+                                            break;
+                                        default:
+                                            Console.WriteLine("Erro de swicht!!");
+                                            break;
+                                    }
                                     break;
                                 case 3:
+                                    Console.Clear();
+                                    CabecalhoONG();
                                     break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");

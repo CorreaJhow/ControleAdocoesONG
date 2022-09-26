@@ -88,6 +88,22 @@ namespace ControleAdocoesONG
             }
             return aux;
         }
+        public int UpdateTable(String sql)
+        {
+            int row = 0;
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                row = cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Erro código " + e.Number + "Contate o administrador");
+            }
+            return row;
+        }
 
     }
 }
