@@ -122,7 +122,7 @@ namespace ControleAdocoesONG
                                             Console.WriteLine("Informe o novo nome: ");
                                             string nome = Console.ReadLine();
                                             string sql = "update Pessoa set Nome = '" + nome + "' where CPF = '" + Cpf + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion
                                             break;
@@ -136,7 +136,7 @@ namespace ControleAdocoesONG
                                                 sexo = Console.ReadLine().ToUpper();
                                             }                                           
                                             sql = "update Pessoa set Sexo = '" + sexo+ "' where CPF = '" + Cpf + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion 
                                             break;
@@ -145,7 +145,7 @@ namespace ControleAdocoesONG
                                             Console.WriteLine("Informe o novo numero de Telefone: ");
                                             string telefone = Console.ReadLine();
                                             sql = "update Pessoa set Telefone = '" + telefone + "' where CPF = '" + Cpf + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion
                                             break;
@@ -154,7 +154,7 @@ namespace ControleAdocoesONG
                                             Console.WriteLine("Informe o nova sigla do estado: ");
                                             string siglaEstado = Console.ReadLine();
                                             sql = "update Pessoa set siglaEstado = '" + siglaEstado + "' where CPF = '" + Cpf + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion
                                             break;
@@ -165,10 +165,11 @@ namespace ControleAdocoesONG
                                     #endregion
                                     break;
                                 case 2:
+                                    #region Atualiza Animal 
                                     Console.Clear();
                                     CabecalhoONG();
                                     Console.WriteLine("Informe o CHIP que do animal que deseja alterar o registro: ");
-                                    string Chip = Console.ReadLine(); //verificar se o cpf existe no banco de dados.
+                                    string Chip = Console.ReadLine(); //verificar se o chip existe no banco de dados.
                                     Console.WriteLine("O que você deseja alterar do Animal: \n[1]Familia \n[2]Raca \n[3]Sexo \n[4]Nome");
                                     int opcAnimal = int.Parse(Console.ReadLine());
                                     while (opcAnimal < 1 || opcAnimal > 4)
@@ -182,8 +183,8 @@ namespace ControleAdocoesONG
                                             #region Atualiza Familia Animal
                                             Console.WriteLine("Informe a nova familia do animal: ");
                                             string familia = Console.ReadLine();
-                                            string sql = "update Animal set Nome = '" + familia + "' where CHIP = '" + Chip + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            string sql = "update Animal set Familia = '" + familia + "' where CHIP = '" + Chip + "';";
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion
                                             break;
@@ -191,8 +192,8 @@ namespace ControleAdocoesONG
                                             #region Atualiza Raca Animal 
                                             Console.WriteLine("Informe a nova raça do animal: ");
                                             string raca = Console.ReadLine();
-                                            string sql = "update Animal set Nome = '" + raca + "' where CHIP = '" + Chip + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                             sql = "update Animal set Raca = '" + raca + "' where CHIP = '" + Chip + "';";
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion  
                                             break;
@@ -206,7 +207,7 @@ namespace ControleAdocoesONG
                                                 sexo = Console.ReadLine().ToUpper();
                                             }
                                             sql = "update Animal set Sexo = '" + sexo + "' where CHIP = '" + sexo + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion
                                             break;
@@ -214,8 +215,8 @@ namespace ControleAdocoesONG
                                             #region Atualiza Nome Animal
                                             Console.WriteLine("Informe o novo nome do animal: ");
                                             string nome = Console.ReadLine();
-                                            string sql = "update Animal set Nome = '" + familia + "' where CHIP = '" + Chip + "';";
-                                            conexaoBD.UpdateTable(sql);
+                                            sql = "update Animal set Nome = '" + nome + "' where CHIP = '" + Chip + "';";
+                                            conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion
                                             break;
@@ -223,10 +224,41 @@ namespace ControleAdocoesONG
                                             Console.WriteLine("Erro de swicht!!");
                                             break;
                                     }
+                                    #endregion 
                                     break;
                                 case 3:
+                                    #region Atualiza Registro Adocao
                                     Console.Clear();
                                     CabecalhoONG();
+                                    Console.WriteLine("Informe o numero de Registro que deseja alterar: ");
+                                    int numRegistro = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("O que deseja alterar do registro de adocoes: \n[1]Adotante (Pessoa) \n[2]Adotado (Animal)");
+                                    int op = int.Parse(Console.ReadLine());
+                                    while (op < 1 || op > 2)
+                                    {
+                                        Console.WriteLine("Opção inválida, informe novamente: ");
+                                        op = int.Parse(Console.ReadLine());
+                                    }
+                                    switch (op)
+                                    {
+                                        case 1:
+                                            Console.WriteLine("Insira o CPF do novo Adotante: ");
+                                            string novocpf = Console.ReadLine();
+                                            string sql = "update RegistroAdocao set Adotante = '" + novocpf + "' where NumeroRegistro = " + numRegistro;
+                                            conexaoBD.AtualizarTabela(sql);
+                                            PressioneParaProsseguir();
+                                            break;
+                                        case 2:
+                                            Console.WriteLine("Insira o CHIP do novo Adotado: ");
+                                            int novochip = int.Parse(Console.ReadLine());
+                                            sql = "update RegistroAdocao set Adotado = " + novochip + " where NumeroRegistro = " + numRegistro;
+                                            conexaoBD.AtualizarTabela(sql);
+                                            PressioneParaProsseguir();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    #endregion
                                     break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");
@@ -251,7 +283,6 @@ namespace ControleAdocoesONG
                             {
                                 case 0:
                                     volta3 = true;
-                                    //voltar
                                     break;
                                 case 1:
                                     //select Pessoa

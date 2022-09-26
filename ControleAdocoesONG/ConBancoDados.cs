@@ -88,7 +88,7 @@ namespace ControleAdocoesONG
             }
             return aux;
         }
-        public int UpdateTable(String sql)
+        public int AtualizarTabela(String sql)
         {
             int row = 0;
             try
