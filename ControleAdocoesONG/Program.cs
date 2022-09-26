@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
-using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ControleAdocoesONG
@@ -51,12 +49,12 @@ namespace ControleAdocoesONG
                             switch (op1)
                             {
                                 case 0:
-                                    volta = true;                                   
+                                    volta = true;
                                     break;
                                 case 1:
                                     #region inserir pessoa             
                                     Console.Clear();
-                                    CabecalhoONG();                                  
+                                    CabecalhoONG();
                                     Pessoa pessoa = new Pessoa();
                                     pessoa = pessoa.CadastroPessoa();
                                     conexaoBD.InserirPessoa(pessoa);
@@ -134,8 +132,8 @@ namespace ControleAdocoesONG
                                             {
                                                 Console.Write("Valor incorreto informado, informe novamente: ");
                                                 sexo = Console.ReadLine().ToUpper();
-                                            }                                           
-                                            sql = "update Pessoa set Sexo = '" + sexo+ "' where CPF = '" + Cpf + "';";
+                                            }
+                                            sql = "update Pessoa set Sexo = '" + sexo + "' where CPF = '" + Cpf + "';";
                                             conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion 
@@ -192,7 +190,7 @@ namespace ControleAdocoesONG
                                             #region Atualiza Raca Animal 
                                             Console.WriteLine("Informe a nova raça do animal: ");
                                             string raca = Console.ReadLine();
-                                             sql = "update Animal set Raca = '" + raca + "' where CHIP = '" + Chip + "';";
+                                            sql = "update Animal set Raca = '" + raca + "' where CHIP = '" + Chip + "';";
                                             conexaoBD.AtualizarTabela(sql);
                                             PressioneParaProsseguir();
                                             #endregion  
@@ -285,12 +283,34 @@ namespace ControleAdocoesONG
                                     volta3 = true;
                                     break;
                                 case 1:
-                                    //select Pessoa
+                                    #region Select Tabela Pessoas
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    Console.WriteLine("Buscando registros...");
+                                    Thread.Sleep(1000);
+                                    string sql = "select Nome, Cpf, Sexo, Telefone, SiglaEstado, dataNascimento from pessoa;";
+                                    conexaoBD.SelectPessoa(sql);
+                                    #endregion
                                     break;
                                 case 2:
-                                    //select into animal
+                                    #region Select Tabela Animal
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    Console.WriteLine("Buscando registros...");
+                                    Thread.Sleep(1000);
+                                    sql = "select CHIP, Familia, Raca, Sexo, Nome from Animal;";
+                                    conexaoBD.SelectAnimal(sql);
+                                    #endregion
                                     break;
                                 case 3:
+                                    #region Select Tabela RegistroAdocao
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    Console.WriteLine("Buscando registros...");
+                                    Thread.Sleep(1000);
+                                    sql = "select NumeroRegistro, Adotante, Adotado from RegistroAdocao;";
+                                    conexaoBD.SelectAdocoes(sql);
+                                    #endregion
                                     break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");
@@ -304,13 +324,11 @@ namespace ControleAdocoesONG
                 }
             } while (true);
         }
-
         public static void PressioneParaProsseguir()
         {
             Console.WriteLine("Pressione enter para continuar...");
             Console.ReadKey();
         }
-
         private static void CabecalhoONG()
         {
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");

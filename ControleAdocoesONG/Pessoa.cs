@@ -31,7 +31,6 @@ namespace ControleAdocoesONG
             SiglaEstado = siglaEstado;
             Numero = numero;
         }   
-
         public Pessoa CadastroPessoa()
         {
             Console.Write("Insira seu nome: ");
@@ -49,8 +48,8 @@ namespace ControleAdocoesONG
             string dataNascimento = Console.ReadLine();
             Console.Write("Insira seu telefone ((xx) xxxxx-xxxx): ");
             string telefone = Console.ReadLine();
-            Console.Write("Insira sua rua: ");
-            string rua = Console.ReadLine();
+            Console.Write("Insira seu Logradouro: ");
+            string logradouro = Console.ReadLine();
             Console.Write("Insira seu bairro: ");
             string bairro = Console.ReadLine();
             Console.Write("Insira sua cidade: ");
@@ -60,7 +59,7 @@ namespace ControleAdocoesONG
             Console.Write("Insira o numero da casa: ");
             string numero = Console.ReadLine();
 
-            Pessoa novaPessoa = new Pessoa(nome, cpf, sexo, dataNascimento, telefone, rua, bairro, cidade, siglaEstado, numero);
+            Pessoa novaPessoa = new Pessoa(nome, cpf, sexo, dataNascimento, telefone, logradouro, bairro, cidade, siglaEstado, numero);
             Console.WriteLine("Dados Obtidos: ");
             Console.WriteLine(novaPessoa.ToString());
             Console.WriteLine("Pressione uma tecla para continuar...");

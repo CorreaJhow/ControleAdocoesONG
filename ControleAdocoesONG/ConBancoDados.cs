@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ControleAdocoesONG
 {
@@ -19,7 +17,6 @@ namespace ControleAdocoesONG
         {
             return Conexao;
         }
-
         public void InserirPessoa(Pessoa pessoa)
         {
             conn.Open();
@@ -36,11 +33,10 @@ namespace ControleAdocoesONG
         public void InserirAnimal(Animal animal)
         {
             conn.Open();
-            string sql = "insert into Animal(CHIP, Familia, Raca, Sexo, Nome) values ("+animal.Chip+", '" + animal.Familia + "', '" + animal.Raca + "', '" + animal.Sexo + "', '" + animal.Nome + "');";
+            string sql = "insert into Animal(CHIP, Familia, Raca, Sexo, Nome) values (" + animal.Chip + ", '" + animal.Familia + "', '" + animal.Raca + "', '" + animal.Sexo + "', '" + animal.Nome + "');";
             SqlCommand sqlCommand = new SqlCommand(sql, conn);
             sqlCommand.ExecuteNonQuery();
             Console.WriteLine("Dados inseridos com sucesso!");
-            Console.WriteLine("Aperte alguma tecla para prosseguir...");
             Console.ReadKey();
             conn.Close();
         }
@@ -88,7 +84,7 @@ namespace ControleAdocoesONG
             }
             return aux;
         }
-        public int AtualizarTabela(String sql)
+        public int AtualizarTabela(string sql)
         {
             int row = 0;
             try
@@ -104,6 +100,103 @@ namespace ControleAdocoesONG
             }
             return row;
         }
-
+        public void SelectPessoa(string sql)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader r = cmd.ExecuteReader();
+                if (!r.HasRows)
+                {
+                    Console.WriteLine("Usuário não localizado! \nOperação cancelada.");
+                    conn.Close();
+                    Console.WriteLine("Pressione uma tecla para prosseguir...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    while (r.Read())
+                    {
+                        Console.WriteLine($"Nome: {r.GetString(0)}");
+                        Console.WriteLine($"CPF: {r.GetString(1)}");
+                        Console.WriteLine($"Sexo: {r.GetString(2)}");
+                        Console.WriteLine($"Tel: {r.GetString(3)}");
+                        Console.WriteLine($"Estado: {r.GetString(4)}");
+                        Console.WriteLine($"Data de nascimento: {r.GetString(5)}");
+                        Console.WriteLine();
+                    }
+                    conn.Close();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Erro código " + e.Number + "Contate o administrador");
+            }
+            Console.WriteLine("Pressione alguma tecla para prosseguir...");
+            Console.ReadKey();
+        }
+        public void SelectAnimal(string sql)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader r = cmd.ExecuteReader();
+                if (!r.HasRows)
+                {
+                    Console.WriteLine("Pet não localizado...");
+                    Console.WriteLine("Pressione uma tecla para prosseguir...");
+                    Console.ReadKey();
+                    conn.Close();
+                }
+                while (r.Read())
+                {
+                    Console.WriteLine($"Chip de Identificação: {r.GetInt32(0)}");
+                    Console.WriteLine($"Familia: {r.GetString(1)}");
+                    Console.WriteLine($"Raça: {r.GetString(2)}");
+                    Console.WriteLine($"Sexo: {r.GetString(3)}");
+                    Console.WriteLine($"Nome: {r.GetString(4)}");
+                    Console.WriteLine();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Erro código " + e.Number + "Contate o administrador");
+            }
+            conn.Close();
+            Console.WriteLine("Pressione alguma tecla para prosseguir...");
+            Console.ReadKey();
+        }
+        public void SelectAdocoes(string sql)
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlDataReader r = cmd.ExecuteReader();
+                if (!r.HasRows)
+                {
+                    Console.WriteLine("Nao localizamos adocoes...");
+                    Console.WriteLine("Pressione uma tecla para prosseguir...");
+                    Console.ReadKey();
+                    conn.Close();
+                }
+                while (r.Read())
+                {
+                    Console.WriteLine($"Numero de Registro: {r.GetInt32(0)}");
+                    Console.WriteLine($"Adotante: {r.GetString(1)}");
+                    Console.WriteLine($"Adotado: {r.GetInt32(2)}");
+                    Console.WriteLine();
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine("Erro código " + e.Number + "Contate o administrador");
+            }
+            conn.Close();
+            Console.WriteLine("Pressione alguma tecla para prosseguir...");
+            Console.ReadKey();
+        }
     }
 }
