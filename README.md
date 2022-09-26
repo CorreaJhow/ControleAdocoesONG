@@ -12,3 +12,13 @@ Faça uma aplicação de console que irá resolver o problema da ONG.
 
 Desenvolvido na linguagem C# (POO) e utilizando SQL server como o Banco de dados, realizando as funções de consultar, registrar e atualizar os registros das tabelas, 
 seja onde o usuario prefira. Atividade com enfase total em linkar e realizar as diversas operações utilizando diretamente o banco de dados, sem arquivos, lista ou afins. 
+
+## Projeto entregue com: 
+- Registro de registro (Aluno, Animal e Adocoes);
+- Consulta de registro (Aluno, Animal e Adocoes);
+- Atualização de registro (Aluno, Animal e Adocoes);
+
+## Excessões para: 
+- Verificações de CPF (se ja existe no banco, como chave primaria);
+- Verificações de CHIP (se ja existe no banco, como chave primaria);
+
