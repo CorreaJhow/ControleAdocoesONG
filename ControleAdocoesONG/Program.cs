@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ControleAdocoesONG
@@ -14,6 +15,7 @@ namespace ControleAdocoesONG
         {
             do
             {
+                ConBancoDados conexaoBD = new ConBancoDados();
                 Console.Clear();
                 CabecalhoONG();
                 Console.WriteLine("Bem vindo ao sistema de Adoções da nossa ONG");
@@ -39,9 +41,9 @@ namespace ControleAdocoesONG
                         {
                             Console.Clear();
                             CabecalhoONG();
-                            Console.WriteLine("O que voce deseja Registrar: \n[0]Voltar \n[1]Pessoa (cliente) \n[2]Animal ");
+                            Console.WriteLine("O que voce deseja Registrar: \n[0]Voltar \n[1]Pessoa (cliente) \n[2]Animal \n[3]Adoção ");
                             int op1 = int.Parse(Console.ReadLine());
-                            while (op1 < 0 || op1 > 2)
+                            while (op1 < 0 || op1 > 3)
                             {
                                 Console.WriteLine("Valor inválido informado, tente novamente: ");
                                 op1 = int.Parse(Console.ReadLine());
@@ -54,16 +56,25 @@ namespace ControleAdocoesONG
                                 case 1:
                                     #region inserir pessoa             
                                     Console.Clear();
-                                    CabecalhoONG();
-                                    ConBancoDados conexaoBD = new ConBancoDados();
+                                    CabecalhoONG();                                  
                                     Pessoa pessoa = new Pessoa();
                                     pessoa = pessoa.CadastroPessoa();
                                     conexaoBD.InserirPessoa(pessoa);
-                                    //inserir pessoas
                                     #endregion  
-                                    break; //ok
+                                    break;
                                 case 2:
-                                    //insert into animal
+                                    #region Inserir Animal
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    Animal animal = new Animal();
+                                    animal = animal.CadastroAnimal();
+                                    conexaoBD.InserirAnimal(animal);
+                                    #endregion                                  
+                                    break;
+                                case 3:
+                                    Console.Clear();
+                                    CabecalhoONG();
+                                    conexaoBD.InserirAdocao();
                                     break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");
@@ -77,9 +88,9 @@ namespace ControleAdocoesONG
                         {
                             Console.Clear();
                             CabecalhoONG();
-                            Console.WriteLine("O que voce deseja Atualizar: \n[0]Voltar\n[1]Pessoa (cliente) \n[2]Animal ");
+                            Console.WriteLine("O que voce deseja Atualizar: \n[0]Voltar\n[1]Pessoa (cliente) \n[2]Animal \n[3]Adocoes ");
                             int op2 = int.Parse(Console.ReadLine());
-                            while (op2 < 0 || op2 > 2)
+                            while (op2 < 0 || op2 > 3)
                             {
                                 Console.WriteLine("Valor inválido informado, tente novamente: ");
                                 op2 = int.Parse(Console.ReadLine());
@@ -96,6 +107,8 @@ namespace ControleAdocoesONG
                                 case 2:
                                     //update into animal
                                     break;
+                                case 3:
+                                    break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");
                                     break;
@@ -108,9 +121,9 @@ namespace ControleAdocoesONG
                         {
                             Console.Clear();
                             CabecalhoONG();
-                            Console.WriteLine("O que voce deseja Consultar: \n[0]Voltar\n[1]Pessoa (cliente) \n[2]Animal ");
+                            Console.WriteLine("O que voce deseja Consultar: \n[0]Voltar\n[1]Pessoa (cliente) \n[2]Animal \n[3]Adocoes ");
                             int op3 = int.Parse(Console.ReadLine());
-                            while (op3 < 0 || op3 > 2)
+                            while (op3 < 0 || op3 > 3)
                             {
                                 Console.WriteLine("Valor inválido informado, tente novamente: ");
                                 op3 = int.Parse(Console.ReadLine());
@@ -127,6 +140,8 @@ namespace ControleAdocoesONG
                                 case 2:
                                     //select into animal
                                     break;
+                                case 3:
+                                    break;
                                 default:
                                     Console.WriteLine("Opção inválida informada");
                                     break;
@@ -139,6 +154,13 @@ namespace ControleAdocoesONG
                 }
             } while (true);
         }
+
+        public static void PressioneParaProsseguir()
+        {
+            Console.WriteLine("Pressione enter para continuar...");
+            Console.ReadKey();
+        }
+
         private static void CabecalhoONG()
         {
             Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");

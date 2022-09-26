@@ -61,7 +61,16 @@ namespace ControleAdocoesONG
             string numero = Console.ReadLine();
 
             Pessoa novaPessoa = new Pessoa(nome, cpf, sexo, dataNascimento, telefone, rua, bairro, cidade, siglaEstado, numero);
+            Console.WriteLine("Dados Obtidos: ");
+            Console.WriteLine(novaPessoa.ToString());
+            Console.WriteLine("Pressione uma tecla para continuar...");
+            Console.ReadKey();
             return novaPessoa;
+        }
+        public override string ToString()
+        {
+            return "\nNome: " + Nome + "\nCPF: " + CPF + "\nSexo: " + Sexo + "\nData de Nascimento: " + DataNascimento +
+                "\nTelefone: " + Telefone + "\nEstado: " + SiglaEstado;
         }
     }
 }
